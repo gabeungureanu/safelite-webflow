@@ -36,6 +36,7 @@ jobs:
       run: |
         echo "${{ secrets.REPO_SSH_PRIVATE_KEY }}" > private_key
         chmod 600 private_key
+        mkdir -p ~/.ssh
         ssh-keyscan github.com >> ~/.ssh/known_hosts
         git config --global core.sshCommand "ssh -i $(pwd)/private_key -o UserKnownHostsFile=~/.ssh/known_hosts"
 
