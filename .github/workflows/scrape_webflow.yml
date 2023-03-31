@@ -44,6 +44,9 @@ jobs:
     - name: Commit and push data
       run: |
         git add data.json
-        git diff --quiet && git diff --staged --quiet || git commit -m "Update data.json with new scraped data"
-        git remote set-url origin git@github.com:gabeungureanu/safelite-webflow.git
-        git push
+        if git diff --quiet && git diff --staged --quiet; then
+          echo "No changes to data.json"
+        else
+          git commit -m "Update data.json with new scraped data"
+          git push
+        fi
