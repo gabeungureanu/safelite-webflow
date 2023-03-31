@@ -13,6 +13,6 @@ jobs:
 
     - name: Run PowerShell script
       run: |
-        if ($host.UI.RawUI -ne $null -and $host.UI.RawUI.SupportsVirtualTerminal) {$RawUI.CursorPosition = @{X=0;Y=0}}
         ./publisher.ps1
       shell: pwsh
+
