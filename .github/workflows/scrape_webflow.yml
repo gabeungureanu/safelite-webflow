@@ -32,9 +32,16 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+    - name: Set up SSH
+      run: |
+        echo "${{ secrets.REPO_SSH_PRIVATE_KEY }}" > private_key
+        chmod 600 private_key
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        git config --global core.sshCommand "ssh -i $(pwd)/private_key -o UserKnownHostsFile=~/.ssh/known_hosts"
+
     - name: Commit and push data
       run: |
         git add data.json
         git diff --quiet && git diff --staged --quiet || git commit -m "Update data.json with new scraped data"
-        git remote set-url origin https://${{ secrets.GABE_GITHUBACTIONS }}@github.com/gabeungureanu/safelite-webflow.git
+        git remote set-url origin git@github.com:gabeungureanu/safelite-webflow.git
         git push
