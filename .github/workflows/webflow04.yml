@@ -1,0 +1,27 @@
+name: Import Webflow Website
+on:
+  workflow_dispatch: 
+  
+jobs:
+  import_website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Download website files from Webflow
+        run: |
+          wget --recursive --no-clobber --page-requisites --html-extension \
+          --convert-links --restrict-file-names=windows --domains webflow.io \
+          --no-parent https://gabriels-fantabulous-site-23ac8b.webflow.io/
+          mv https://gabriels-fantabulous-site-23ac8b.webflow.io/* .
+          rm -rf https://gabriels-fantabulous-site-23ac8b.webflow.io/
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: Gabriel Ungureanu
+          author_email: gabe.ungureanu@outlook.com
+          message: "Imported Website01 from Webflow"
+      - name: Push changes to GitHub
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ GABE_GITHUBACTIONS }}
