@@ -13,7 +13,6 @@ jobs:
           wget --recursive --no-clobber --page-requisites --html-extension \
           --convert-links --restrict-file-names=windows --domains webflow.io \
           --no-parent https://gabriels-fantabulous-site-23ac8b.webflow.io/
-          mv https://gabriels-fantabulous-site-23ac8b.webflow.io/ safelite-webflow/;
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v7
         with:
