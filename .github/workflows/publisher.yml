@@ -1,0 +1,17 @@
+name: Webflow to AWS Amazion Website
+
+on:
+  workflow_dispatch: # Manually trigger the workflow from GitHub Actions tab
+
+jobs:
+  run_powershell_script:
+    runs-on: windows-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Run PowerShell script
+      run: |
+        ./publisher.ps1
+      shell: pwsh
