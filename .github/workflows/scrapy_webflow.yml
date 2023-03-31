@@ -25,7 +25,7 @@ jobs:
 
     - name: Scrape data
       run: |
-        scrapy crawl my_spider -o data.json
+        python -m scrapy crawl my_spider -o data.json
 
     - name: Configure Git
       run: |
